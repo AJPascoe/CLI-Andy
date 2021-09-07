@@ -1,3 +1,7 @@
+const fs = require("fs");
+
+
+
 exports.goodOrBad = (likeVar, movie, actor, director, favActor) => {
   if (favActor) {
     if (likeVar === "fav") {
@@ -17,7 +21,14 @@ exports.goodOrBad = (likeVar, movie, actor, director, favActor) => {
     }
   } else if (actor) {
     if (likeVar === "good") {
-      console.log(`I think ${movie} is good with ${actor}`);
+      // console.log(`I think ${movie} is good with ${actor}`);
+        const stringyObj = JSON.stringify({
+        name: movie,
+        like: likeVar,
+        actor: actor
+      });
+      fs.writeFileSync("../../storage.json", stringyObj)
+
     } else if (likeVar === "bad") {
       console.log(`I think ${movie} is bad with ${actor}`);
     } else {
